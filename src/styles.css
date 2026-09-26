@@ -1,0 +1,271 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Off Book Self-Tape Studio design system.
+ * Mood: warm tungsten light in a dark film studio.
+ * All colors are oklch tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.9rem;
+
+  /* Light: warm rehearsal-room paper */
+  --background: oklch(0.965 0.008 90);
+  --foreground: oklch(0.22 0.01 285);
+
+  --card: oklch(0.985 0.006 90);
+  --card-foreground: oklch(0.22 0.01 285);
+
+  --popover: oklch(0.985 0.006 90);
+  --popover-foreground: oklch(0.22 0.01 285);
+
+  /* Tungsten amber */
+  --primary: oklch(0.72 0.15 62);
+  --primary-foreground: oklch(0.99 0.005 90);
+
+  --secondary: oklch(0.925 0.01 85);
+  --secondary-foreground: oklch(0.28 0.01 285);
+
+  --muted: oklch(0.93 0.01 85);
+  --muted-foreground: oklch(0.5 0.015 285);
+
+  --accent: oklch(0.9 0.045 80);
+  --accent-foreground: oklch(0.42 0.09 60);
+
+  --destructive: oklch(0.58 0.19 26);
+  --destructive-foreground: oklch(0.98 0.005 90);
+
+  --success: oklch(0.6 0.12 160);
+  --success-foreground: oklch(0.98 0.005 160);
+
+  --border: oklch(0.875 0.01 85);
+  --input: oklch(0.875 0.01 85);
+  --ring: oklch(0.72 0.15 62);
+
+  --chart-1: oklch(0.72 0.15 62);
+  --chart-2: oklch(0.6 0.12 160);
+  --chart-3: oklch(0.6 0.1 250);
+  --chart-4: oklch(0.65 0.15 30);
+  --chart-5: oklch(0.55 0.05 285);
+
+  --sidebar: oklch(0.945 0.008 88);
+  --sidebar-foreground: oklch(0.22 0.01 285);
+  --sidebar-primary: oklch(0.72 0.15 62);
+  --sidebar-primary-foreground: oklch(0.99 0.005 90);
+  --sidebar-accent: oklch(0.925 0.01 85);
+  --sidebar-accent-foreground: oklch(0.28 0.01 285);
+  --sidebar-border: oklch(0.875 0.01 85);
+  --sidebar-ring: oklch(0.72 0.15 62);
+
+  --gradient-tungsten: radial-gradient(
+    120% 90% at 50% -10%,
+    color-mix(in oklab, var(--primary) 14%, transparent) 0%,
+    transparent 62%
+  );
+  --gradient-amber: linear-gradient(
+    135deg,
+    var(--primary),
+    color-mix(in oklab, var(--primary) 80%, oklch(0.8 0.14 45))
+  );
+  --shadow-booth: 0 18px 50px -28px oklch(0.3 0.02 285 / 0.35);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--primary) 35%, transparent),
+    0 14px 40px -18px color-mix(in oklab, var(--primary) 40%, transparent);
+  --transition-soft: 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.dark {
+  /* Dark: warm tungsten light in a dark film studio */
+  --background: oklch(0.155 0.004 285);
+  --foreground: oklch(0.951 0.006 85);
+
+  --card: oklch(0.205 0.005 285);
+  --card-foreground: oklch(0.951 0.006 85);
+
+  --popover: oklch(0.205 0.005 285);
+  --popover-foreground: oklch(0.951 0.006 85);
+
+  /* Tungsten amber */
+  --primary: oklch(0.775 0.153 68);
+  --primary-foreground: oklch(0.23 0.012 250);
+
+  --secondary: oklch(0.245 0.006 285);
+  --secondary-foreground: oklch(0.951 0.006 85);
+
+  --muted: oklch(0.235 0.006 285);
+  --muted-foreground: oklch(0.655 0.012 85);
+
+  --accent: oklch(0.265 0.02 70);
+  --accent-foreground: oklch(0.88 0.09 72);
+
+  --destructive: oklch(0.63 0.185 26);
+  --destructive-foreground: oklch(0.97 0.006 85);
+
+  --success: oklch(0.65 0.12 160);
+  --success-foreground: oklch(0.16 0.01 160);
+
+  --border: oklch(0.255 0.006 285);
+  --input: oklch(0.255 0.006 285);
+  --ring: oklch(0.775 0.153 68);
+
+  --chart-1: oklch(0.775 0.153 68);
+  --chart-2: oklch(0.65 0.12 160);
+  --chart-3: oklch(0.7 0.1 250);
+  --chart-4: oklch(0.72 0.14 30);
+  --chart-5: oklch(0.6 0.05 285);
+
+  --sidebar: oklch(0.185 0.005 285);
+  --sidebar-foreground: oklch(0.951 0.006 85);
+  --sidebar-primary: oklch(0.775 0.153 68);
+  --sidebar-primary-foreground: oklch(0.23 0.012 250);
+  --sidebar-accent: oklch(0.245 0.006 285);
+  --sidebar-accent-foreground: oklch(0.951 0.006 85);
+  --sidebar-border: oklch(0.255 0.006 285);
+  --sidebar-ring: oklch(0.775 0.153 68);
+
+  --gradient-tungsten: radial-gradient(
+    120% 90% at 50% -10%,
+    color-mix(in oklab, var(--primary) 22%, transparent) 0%,
+    transparent 62%
+  );
+  --gradient-amber: linear-gradient(
+    135deg,
+    var(--primary),
+    color-mix(in oklab, var(--primary) 70%, oklch(0.85 0.13 45))
+  );
+  --shadow-booth: 0 18px 50px -24px oklch(0 0 0 / 0.85);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--primary) 30%, transparent),
+    0 14px 40px -18px color-mix(in oklab, var(--primary) 45%, transparent);
+  --transition-soft: 220ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+}
+
+@utility tungsten-wash {
+  background-image: var(--gradient-tungsten);
+}
+
+@utility booth-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-booth);
+}
+
+@utility amber-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility slot-chip {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: color-mix(in oklab, var(--card) 70%, transparent);
+  transition: all var(--transition-soft);
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--primary) 55%, transparent);
+    background-color: color-mix(in oklab, var(--primary) 12%, var(--card));
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes filament {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility rise-in {
+  animation: rise-in 420ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@utility filament-pulse {
+  animation: filament 2.6s ease-in-out infinite;
+}
