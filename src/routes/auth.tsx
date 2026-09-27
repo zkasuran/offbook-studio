@@ -12,12 +12,12 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Studio sign in — Off Book Self-Tape Studio" },
+      { title: "Studio sign in · Off Book Self-Tape Studio" },
       {
         name: "description",
         content: "Owner sign in for the Off Book Self-Tape Studio control room.",
       },
-      { property: "og:title", content: "Studio sign in — Off Book Self-Tape Studio" },
+      { property: "og:title", content: "Studio sign in · Off Book Self-Tape Studio" },
       { property: "og:description", content: "Owner sign in for the studio dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

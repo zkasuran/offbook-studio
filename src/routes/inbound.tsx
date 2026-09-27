@@ -12,13 +12,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 export const Route = createFileRoute("/inbound")({
   head: () => ({
     meta: [
-      { title: "Inbound text-back — Off Book Self-Tape Studio" },
+      { title: "Inbound text-back · Off Book Self-Tape Studio" },
       {
         name: "description",
         content:
           "The message the owner missed while filming gets answered anyway: open slots, matched to the actor's deadline, one tap to hold.",
       },
-      { property: "og:title", content: "Inbound text-back — Off Book Self-Tape Studio" },
+      { property: "og:title", content: "Inbound text-back · Off Book Self-Tape Studio" },
       {
         property: "og:description",
         content: "Missed messages get answered with real open slots in the studio's voice.",
@@ -60,7 +60,7 @@ function InboundPage() {
         </h1>
         <p className="mt-3 text-muted-foreground">
           An actor texts at 11pm. You're in the booth with the door shut. The studio reads the
-          message, works out the deadline, and offers the slots that actually beat it.
+          message, works out the deadline and offers the slots that actually beat it.
         </p>
 
         <div className="booth-card mt-8 p-6">
@@ -112,7 +112,7 @@ function InboundPage() {
 
             {reply.waitlistOffered && (
               <p className="mt-4 text-xs text-muted-foreground">
-                Nothing clean before the deadline — the waitlist on the booking page catches the
+                Nothing clean before the deadline. The waitlist on the booking page catches the
                 next cancellation automatically.
               </p>
             )}

@@ -77,7 +77,7 @@ export async function sendStudioEmail({ to, subject, body, kind, bookingId }: Em
       providerError = e instanceof Error ? e.message : "Email provider unreachable";
     }
   } else {
-    providerError = "No sending domain connected yet — email recorded only.";
+    providerError = "No sending domain connected yet, email recorded only.";
   }
 
   await supabaseAdmin.from("outbound_emails").insert({
@@ -99,7 +99,7 @@ export function confirmationEmail(opts: {
   startsAt: string;
   depositCents: number;
 }) {
-  const subject = `You're booked — ${opts.serviceName}, ${fmtLA(opts.startsAt)}`;
+  const subject = `You're booked for ${opts.serviceName}, ${fmtLA(opts.startsAt)}`;
   const body = [
     `${opts.actorName}, your booth time is locked.`,
     ``,
@@ -108,7 +108,7 @@ export function confirmationEmail(opts: {
     `${fmtLA(opts.startsAt)}`,
     `${STUDIO.city}`,
     ``,
-    `Deposit paid: ${dollars(opts.depositCents)} — it credits straight to your session, so you only settle the balance in the room.`,
+    `Deposit paid: ${dollars(opts.depositCents)}. It credits straight to your session, so you only settle the balance in the room.`,
     ``,
     STUDIO.cancellationWindow,
     ``,
@@ -139,7 +139,7 @@ export async function createCheckoutSession(opts: {
   form.set("line_items[0][price_data][unit_amount]", String(opts.depositCents));
   form.set(
     "line_items[0][price_data][product_data][name]",
-    `Deposit — ${opts.serviceName}`,
+    `Deposit for ${opts.serviceName}`,
   );
   form.set(
     "line_items[0][price_data][product_data][description]",
@@ -220,7 +220,7 @@ export async function offerSlotToWaitlist(slotId: string, origin: string) {
     .update({ status: "held", hold_token: token, hold_expires_at: expires })
     .eq("id", slot.id);
 
-  const subject = `A slot just opened — ${fmtLA(slot.starts_at)}`;
+  const subject = `A slot just opened for ${fmtLA(slot.starts_at)}`;
   const body = [
     `${next.actor_name}, the booth just freed up.`,
     ``,

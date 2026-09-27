@@ -14,13 +14,13 @@ import { laDateKey, laDayLabel, laTime, money } from "@/lib/time";
 export const Route = createFileRoute("/_authenticated/studio")({
   head: () => ({
     meta: [
-      { title: "Control room — Off Book Self-Tape Studio" },
+      { title: "Control room · Off Book Self-Tape Studio" },
       {
         name: "description",
         content:
           "Today's booth schedule, deposits, waitlist and the effort the studio saved this week.",
       },
-      { property: "og:title", content: "Control room — Off Book Self-Tape Studio" },
+      { property: "og:title", content: "Control room · Off Book Self-Tape Studio" },
       { property: "og:description", content: "Today's schedule and the studio impact meter." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -57,7 +57,7 @@ function StudioDashboard() {
       const res = await cancel({ data: { bookingId: id, origin: window.location.origin } });
       toast.success(
         res.refilled
-          ? "Cancelled — the freed slot was offered to the waitlist automatically."
+          ? "Cancelled. The freed slot was offered to the waitlist automatically."
           : "Cancelled. The slot is back on the public board.",
       );
       await qc.invalidateQueries({ queryKey: ["dashboard"] });
@@ -267,7 +267,7 @@ function StudioDashboard() {
                 <h2 className="font-display text-xl">Emails sent</h2>
                 {data.emails.length === 0 ? (
                   <p className="booth-card mt-4 p-6 text-sm text-muted-foreground">
-                    No emails yet — they go out the moment a deposit clears.
+                    No emails yet. They go out the moment a deposit clears.
                   </p>
                 ) : (
                   <ul className="booth-card mt-4 divide-y divide-border">

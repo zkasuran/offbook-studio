@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(availabilityQuery),
   head: () => ({
     meta: [
-      { title: "Off Book Self-Tape Studio — Book your audition tape in North Hollywood" },
+      { title: "Off Book Self-Tape Studio · Book your audition tape in North Hollywood" },
       {
         name: "description",
         content:
@@ -123,8 +123,8 @@ function BookingPage() {
             <span className="text-primary">Hold your slot in 60 seconds.</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Auditions land at midnight and are due by nine. Pick a time, pay a small deposit,
-            and the booth is yours — lit, miked and with a reader who actually acts.
+            Auditions land at midnight and are due by nine. Pick a time, pay a small deposit
+            and the booth is yours, lit, miked and with a reader who actually acts.
           </p>
         </div>
       </section>
@@ -177,7 +177,7 @@ function BookingPage() {
             <div className="booth-card mt-4 p-8 text-center">
               <p className="font-display text-lg">The booth is fully booked this week.</p>
               <p className="mt-2 text-sm text-muted-foreground">
-                Join the waitlist below — the next cancellation goes out automatically, first
+                Join the waitlist below. The next cancellation goes out automatically, first
                 come first served.
               </p>
             </div>
@@ -276,7 +276,7 @@ function BookingPage() {
                   : "Hold my slot"}
             </Button>
             <p className="mt-3 text-xs text-muted-foreground">
-              The deposit is credited to your session — you only settle the balance in the room.
+              The deposit is credited to your session. You only settle the balance in the room.
               Cancel or move up to 4 hours before and the deposit follows you.
             </p>
           </div>

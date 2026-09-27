@@ -14,12 +14,12 @@ export const Route = createFileRoute("/confirm")({
   }),
   head: () => ({
     meta: [
-      { title: "Your slot is held — Off Book Self-Tape Studio" },
+      { title: "Your slot is held · Off Book Self-Tape Studio" },
       {
         name: "description",
         content: "Deposit received. Your self-tape session at Off Book is confirmed.",
       },
-      { property: "og:title", content: "Your slot is held — Off Book Self-Tape Studio" },
+      { property: "og:title", content: "Your slot is held · Off Book Self-Tape Studio" },
       { property: "og:description", content: "Deposit received. See you in the booth." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -79,7 +79,7 @@ function ConfirmPage() {
               <Row label="Where" value="North Hollywood, CA" />
               <Row
                 label="Deposit paid"
-                value={`${money(data.depositCents)} — credited to your session`}
+                value={`${money(data.depositCents)} credited to your session`}
               />
               <Row label="Balance in the room" value={money(data.balanceCents)} />
             </dl>

@@ -13,12 +13,12 @@ import { laDayLabel, laTime, money } from "@/lib/time";
 export const Route = createFileRoute("/claim/$token")({
   head: () => ({
     meta: [
-      { title: "Claim your slot — Off Book Self-Tape Studio" },
+      { title: "Claim your slot · Off Book Self-Tape Studio" },
       {
         name: "description",
         content: "A session just freed up. Claim it with a deposit before the hold runs out.",
       },
-      { property: "og:title", content: "Claim your slot — Off Book Self-Tape Studio" },
+      { property: "og:title", content: "Claim your slot · Off Book Self-Tape Studio" },
       { property: "og:description", content: "A session just freed up. It's held for you." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

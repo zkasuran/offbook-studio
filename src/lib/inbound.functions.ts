@@ -59,7 +59,7 @@ export const answerInbound = createServerFn({ method: "POST" })
                   `Read the inbound message and return ONLY minified JSON with keys: ` +
                   `"intent" (booking_request | question | other), ` +
                   `"deadline" (ISO 8601 UTC timestamp the actor must be finished by, or null), ` +
-                  `"opening" (one or two warm, plain sentences in the studio voice, no emoji, no markdown, no slot times — the times get appended after).`,
+                  `"opening" (one or two warm, plain sentences in the studio voice, no emoji, no markdown, no slot times and no time of day such as tonight or this morning, because the times get appended after).`,
               },
               { role: "user", content: data.body },
             ],
@@ -89,7 +89,7 @@ export const answerInbound = createServerFn({ method: "POST" })
 
     if (!opening) {
       opening =
-        "Caught this between takes — we can get you on camera. Here's what's still open in the booth.";
+        "Caught this between takes, we can get you on camera. Here's what's still open in the booth.";
     }
 
     const beforeDeadline = deadline
@@ -108,7 +108,7 @@ export const answerInbound = createServerFn({ method: "POST" })
     if (suggestions.length > 0) {
       lines.push(
         missedDeadline
-          ? "Nothing lands before your deadline, but these are the nearest times — tap one to hold it with a deposit:"
+          ? "Nothing lands before your deadline, but these are the nearest times. Tap one to hold it with a deposit:"
           : "Tap a time to hold it with a deposit:",
       );
       for (const s of suggestions) lines.push(`• ${s.label}`);
