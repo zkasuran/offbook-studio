@@ -53,12 +53,17 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.9rem;
+  --hero-foreground: oklch(0.98 0.006 85);
+  --hero-muted: oklch(0.84 0.009 85);
+  --hero-overlay: oklch(0.09 0.008 285);
 
   /* Light: warm rehearsal-room paper */
   --background: oklch(0.965 0.008 90);
@@ -125,6 +130,9 @@
 }
 
 .dark {
+  --hero-foreground: oklch(0.98 0.006 85);
+  --hero-muted: oklch(0.84 0.009 85);
+  --hero-overlay: oklch(0.09 0.008 285);
   /* Dark: warm tungsten light in a dark film studio */
   --background: oklch(0.155 0.004 285);
   --foreground: oklch(0.951 0.006 85);
@@ -210,7 +218,51 @@
   .font-display {
     font-family: var(--font-display);
     font-optical-sizing: auto;
-    letter-spacing: -0.015em;
+    letter-spacing: 0;
+  }
+}
+
+.studio-hero-shade {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--hero-overlay) 97%, transparent) 0%, color-mix(in oklab, var(--hero-overlay) 74%, transparent) 40%, color-mix(in oklab, var(--hero-overlay) 15%, transparent) 100%), linear-gradient(0deg, color-mix(in oklab, var(--hero-overlay) 90%, transparent), transparent 55%);
+}
+
+.studio-inbound-hero .studio-hero-shade {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--hero-overlay) 94%, transparent), color-mix(in oklab, var(--hero-overlay) 62%, transparent) 54%, color-mix(in oklab, var(--hero-overlay) 20%, transparent)), linear-gradient(0deg, color-mix(in oklab, var(--hero-overlay) 75%, transparent), transparent 60%);
+}
+
+.studio-interlude-shade {
+  background: linear-gradient(90deg, color-mix(in oklab, var(--hero-overlay) 85%, transparent), transparent 95%), linear-gradient(0deg, color-mix(in oklab, var(--hero-overlay) 90%, transparent), transparent 80%);
+}
+
+.studio-grain {
+  pointer-events: none;
+  opacity: 0.14;
+  background-image: repeating-linear-gradient(0deg, transparent 0 2px, color-mix(in oklab, var(--hero-foreground) 3%, transparent) 2px 3px);
+}
+
+.studio-hero-video { opacity: 1; }
+.studio-hero-image { opacity: 1; }
+
+.studio-media-drift {
+  animation: studio-media-drift 12s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes studio-media-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.045); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-hero-video { display: none; }
+  .studio-hero-image { opacity: 1; }
+  .studio-media-drift { animation: none; }
+  .rise-in, .filament-pulse { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .studio-hero-shade, .studio-inbound-hero .studio-hero-shade {
+    background: linear-gradient(0deg, color-mix(in oklab, var(--hero-overlay) 98%, transparent), color-mix(in oklab, var(--hero-overlay) 75%, transparent) 52%, color-mix(in oklab, var(--hero-overlay) 24%, transparent));
   }
 }
 

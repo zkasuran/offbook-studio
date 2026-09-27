@@ -10,6 +10,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { laDayLabel, laDateKey, laTime, money } from "@/lib/time";
+import heroImage from "@/assets/studio-hero.jpg";
+import roomImage from "@/assets/inbound-studio.jpg";
+import quickTapeImage from "@/assets/quick-tape.jpg";
+import readerTapeImage from "@/assets/reader-tape.jpg";
+import coachingImage from "@/assets/coaching.jpg";
+import auditionImage from "@/assets/audition-sides.jpg";
+import waitlistImage from "@/assets/waitlist-actor.jpg";
+import seamlessMotion from "@/assets/studio-montage-loop.webm.asset.json";
+import readerMotion from "@/assets/reader-true-loop.webm.asset.json";
+import auditionMotion from "@/assets/audition-true-loop.webm.asset.json";
+
+const serviceImages = [quickTapeImage, readerTapeImage, coachingImage];
 
 const availabilityQuery = queryOptions({
   queryKey: ["availability"],
@@ -112,66 +124,82 @@ function BookingPage() {
 
   return (
     <StudioShell>
-      <section className="tungsten-wash relative">
-        <div className="mx-auto max-w-5xl px-5 pb-10 pt-16 sm:pt-24">
-          <p className="text-xs uppercase tracking-[0.22em] text-primary">
+      <section className="studio-hero relative isolate flex min-h-[510px] items-end overflow-hidden sm:min-h-[590px]">
+        <img src={heroImage} width={1536} height={1024} alt="Actor performing a self-tape in a lit studio booth" className="studio-hero-image absolute inset-0 h-full w-full object-cover object-[62%_center]" fetchPriority="high" />
+        <video className="studio-hero-video absolute inset-0 h-full w-full object-cover object-[62%_center]" autoPlay muted loop playsInline poster={heroImage} aria-hidden="true">
+          <source src={seamlessMotion.url} type="video/webm" />
+        </video>
+        <div className="studio-hero-shade absolute inset-0" aria-hidden="true" />
+        <div className="studio-grain absolute inset-0" aria-hidden="true" />
+        <div className="relative mx-auto w-full max-w-5xl px-5 pb-12 pt-28 sm:pb-20">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
             North Hollywood · One booth
           </p>
-          <h1 className="rise-in mt-4 max-w-2xl font-display text-4xl leading-[1.05] sm:text-6xl">
+          <h1 className="rise-in mt-5 max-w-2xl font-display text-5xl leading-[1.05] text-hero-foreground sm:text-7xl">
             Book your self-tape.
             <br />
             <span className="text-primary">Hold your slot in 60 seconds.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-hero-muted sm:text-lg">
             Auditions land at midnight and are due by nine. Pick a time, pay a small deposit
             and the booth is yours, lit, miked and with a reader who actually acts.
           </p>
+          <div className="mt-8 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.18em] text-hero-muted">
+            <span className="h-px w-8 bg-primary" /> Your scene starts here
+          </div>
         </div>
       </section>
 
       <main className="mx-auto max-w-5xl px-5 pb-8">
-        <section aria-labelledby="services" className="mt-6">
-          <h2 id="services" className="font-display text-xl">
+        <section aria-labelledby="services" className="mt-12 sm:mt-16">
+          <h2 id="services" className="font-display text-2xl">
             1. Pick your session
           </h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {data.services.map((s) => {
+            {data.services.map((s, index) => {
               const active = s.id === serviceId;
               return (
-                <button
+                <Button
                   key={s.id}
                   type="button"
+                  variant="outline"
                   onClick={() => setServiceId(s.id)}
-                  className={`booth-card p-5 text-left transition-all ${
+                  aria-pressed={active}
+                  className={`booth-card group h-auto min-h-72 flex-col items-stretch justify-start overflow-hidden whitespace-normal p-0 text-left transition-all duration-300 hover:-translate-y-1 ${
                     active ? "amber-glow border-primary/60" : "hover:border-primary/30"
                   }`}
                 >
-                  <div className="flex items-baseline justify-between gap-2">
-                    <span className="font-display text-lg">{s.name}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {s.duration_minutes} min
-                    </span>
+                  <div className="relative h-36 w-full overflow-hidden sm:h-40">
+                    <img src={serviceImages[index % serviceImages.length]} width={1024} height={768} loading="lazy" alt="" className="studio-media-drift h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <span className="absolute bottom-3 right-3 bg-background/85 px-2 py-1 text-xs text-foreground backdrop-blur-sm">{s.duration_minutes} min</span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {s.description}
-                  </p>
-                  <p className="mt-4 text-sm">
-                    <span className="text-foreground">{money(s.price_cents)}</span>
-                    <span className="text-muted-foreground">
-                      {" "}
-                      · {money(s.deposit_cents)} deposit holds it
-                    </span>
-                  </p>
-                </button>
+                  <div className="flex w-full flex-1 flex-col p-5">
+                    <span className="font-display text-lg">{s.name}</span>
+                    <p className="mt-2 w-full flex-1 text-sm font-normal leading-relaxed text-muted-foreground">{s.description}</p>
+                    <p className="mt-4 w-full text-sm font-normal"><span className="text-foreground">{money(s.price_cents)}</span><span className="text-muted-foreground"> · {money(s.deposit_cents)} deposit holds it</span></p>
+                  </div>
+                </Button>
               );
             })}
           </div>
         </section>
 
-        <section aria-labelledby="slots" className="mt-12">
-          <h2 id="slots" className="font-display text-xl">
-            2. Pick a time
-          </h2>
+        <div className="studio-interlude relative mt-12 overflow-hidden sm:mt-16">
+          <img src={roomImage} width={1536} height={1024} loading="lazy" alt="Actor preparing a script in front of the studio camera and lights" className="absolute inset-0 h-full w-full object-cover object-center" />
+          <video className="studio-hero-video absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="none" poster={roomImage} aria-hidden="true">
+            <source src={readerMotion.url} type="video/webm" />
+          </video>
+          <div className="studio-interlude-shade absolute inset-0" aria-hidden="true" />
+          <div className="studio-grain absolute inset-0" aria-hidden="true" />
+          <div className="relative flex min-h-48 flex-col justify-end p-6 sm:min-h-56 sm:p-9">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">In the room</p>
+            <p className="mt-2 max-w-md font-display text-2xl leading-tight text-hero-foreground sm:text-3xl">The camera is rolling. The next take is yours.</p>
+          </div>
+        </div>
+
+        <section aria-labelledby="slots" className="mt-12 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_17rem]">
+          <div className="min-w-0">
+            <h2 id="slots" className="font-display text-2xl">2. Pick a time</h2>
 
           {days.length === 0 ? (
             <div className="booth-card mt-4 p-8 text-center">
@@ -185,17 +213,19 @@ function BookingPage() {
             <>
               <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
                 {days.map(([key, slots]) => (
-                  <button
+                  <Button
                     key={key}
                     type="button"
+                    variant="outline"
                     onClick={() => setActiveDay(key)}
-                    className={`slot-chip whitespace-nowrap px-4 py-2 text-sm ${
+                    aria-pressed={key === activeDay}
+                    className={`slot-chip h-auto whitespace-nowrap px-4 py-2 text-sm ${
                       key === activeDay ? "border-primary/70 text-primary" : "text-muted-foreground"
                     }`}
                   >
-                    {laDayLabel(slots[0]!.starts_at)}
+                    {laDayLabel(slots[0]?.starts_at ?? "")}
                     <span className="ml-2 text-xs opacity-70">{slots.length}</span>
-                  </button>
+                  </Button>
                 ))}
               </div>
 
@@ -203,27 +233,38 @@ function BookingPage() {
                 {daySlots.map((s) => {
                   const active = s.id === slotId;
                   return (
-                    <button
+                    <Button
                       key={s.id}
                       type="button"
+                      variant="outline"
                       onClick={() => setSlotId(s.id)}
-                      className={`slot-chip px-2 py-3 text-sm ${
+                      aria-pressed={active}
+                      className={`slot-chip h-11 px-2 text-sm ${
                         active
                           ? "border-primary bg-primary/15 text-primary"
                           : "text-foreground"
                       }`}
                     >
                       {laTime(s.starts_at)}
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
             </>
           )}
+          </div>
+          <div className="relative hidden aspect-[4/5] overflow-hidden lg:block">
+            <img src={auditionImage} width={1024} height={768} loading="lazy" alt="Actor reviewing audition sides beside the camera monitor" className="absolute inset-0 h-full w-full object-cover" />
+            <video className="studio-hero-video absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="none" poster={auditionImage} aria-hidden="true">
+              <source src={auditionMotion.url} type="video/webm" />
+            </video>
+            <div className="studio-interlude-shade absolute inset-0" aria-hidden="true" />
+            <p className="absolute bottom-5 left-5 right-5 font-display text-xl text-hero-foreground">Make the deadline. Keep the moment.</p>
+          </div>
         </section>
 
         <section aria-labelledby="details" className="mt-12">
-          <h2 id="details" className="font-display text-xl">
+          <h2 id="details" className="font-display text-2xl">
             3. Hold it
           </h2>
           <div className="booth-card mt-4 p-6">
@@ -282,7 +323,12 @@ function BookingPage() {
           </div>
         </section>
 
-        <WaitlistCard />
+        <div className="mt-12 grid items-stretch gap-4 md:grid-cols-[minmax(0,1fr)_17rem]">
+          <WaitlistCard />
+          <div className="min-h-52 overflow-hidden">
+            <img src={waitlistImage} width={1024} height={768} loading="lazy" alt="Actor reading audition sides outside the studio booth" className="studio-media-drift h-full w-full object-cover" />
+          </div>
+        </div>
       </main>
     </StudioShell>
   );
@@ -298,7 +344,7 @@ function WaitlistCard() {
 
   if (done) {
     return (
-      <section className="booth-card rise-in mt-12 p-6">
+      <section className="booth-card rise-in p-6">
         <h2 className="font-display text-xl text-primary">You're on the list</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The next cancellation that matches your window is emailed straight to you with a
@@ -309,7 +355,7 @@ function WaitlistCard() {
   }
 
   return (
-    <section className="booth-card mt-12 p-6">
+    <section className="booth-card p-6">
       <h2 className="font-display text-xl">Nothing fits? Get the next cancellation.</h2>
       <p className="mt-2 text-sm text-muted-foreground">
         Tell us your window. When a slot frees up it's offered to you first, held for 30

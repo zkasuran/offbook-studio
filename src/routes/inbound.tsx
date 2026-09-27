@@ -8,6 +8,10 @@ import { StudioShell } from "@/components/studio/shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
+import roomImage from "@/assets/inbound-studio.jpg";
+import readerImage from "@/assets/reader-tape.jpg";
+import seamlessMotion from "@/assets/studio-montage-loop.webm.asset.json";
+import readerMotion from "@/assets/reader-true-loop.webm.asset.json";
 
 export const Route = createFileRoute("/inbound")({
   head: () => ({
@@ -53,17 +57,24 @@ function InboundPage() {
 
   return (
     <StudioShell>
-      <main className="tungsten-wash mx-auto max-w-2xl px-5 py-16">
-        <p className="text-xs uppercase tracking-[0.22em] text-primary">While you're filming</p>
-        <h1 className="mt-3 font-display text-3xl sm:text-4xl">
-          Every missed message still gets an answer.
-        </h1>
-        <p className="mt-3 text-muted-foreground">
-          An actor texts at 11pm. You're in the booth with the door shut. The studio reads the
-          message, works out the deadline and offers the slots that actually beat it.
-        </p>
+      <main>
+        <section className="studio-hero studio-inbound-hero relative isolate flex min-h-[400px] items-end overflow-hidden sm:min-h-[480px]">
+          <img src={roomImage} width={1536} height={1024} alt="Actor preparing a script while a camera records a self-tape" className="absolute inset-0 h-full w-full object-cover object-[60%_center]" fetchPriority="high" />
+          <video className="studio-hero-video absolute inset-0 h-full w-full object-cover object-[60%_center]" autoPlay muted loop playsInline poster={roomImage} aria-hidden="true">
+            <source src={seamlessMotion.url} type="video/webm" />
+          </video>
+          <div className="studio-hero-shade absolute inset-0" aria-hidden="true" />
+          <div className="studio-grain absolute inset-0" aria-hidden="true" />
+          <div className="relative mx-auto w-full max-w-5xl px-5 pb-12 pt-24 sm:pb-16">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">While you're filming</p>
+            <h1 className="rise-in mt-4 max-w-2xl font-display text-4xl leading-tight text-hero-foreground sm:text-6xl">Every missed message still gets an answer.</h1>
+            <p className="mt-5 max-w-lg text-hero-muted">An actor texts at 11pm. You're in the booth with the door shut. The studio reads the message, works out the deadline and offers the slots that actually beat it.</p>
+          </div>
+        </section>
 
-        <div className="booth-card mt-8 p-6">
+        <div className="mx-auto max-w-5xl px-5 pb-16 pt-10 lg:grid lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start lg:gap-8">
+        <div className="min-w-0">
+        <div className="booth-card p-6 sm:p-8">
           <label htmlFor="msg" className="text-sm text-muted-foreground">
             Inbound message
           </label>
@@ -118,6 +129,16 @@ function InboundPage() {
             )}
           </div>
         )}
+        </div>
+        <div className="mt-8 overflow-hidden lg:sticky lg:top-8 lg:mt-0">
+          <div className="relative aspect-[4/5] overflow-hidden">
+            <img src={readerImage} width={1024} height={768} loading="lazy" alt="Actor and reader working through a self-tape in the studio" className="absolute inset-0 h-full w-full object-cover" />
+            <video className="studio-hero-video absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="none" poster={readerImage} aria-hidden="true">
+              <source src={readerMotion.url} type="video/webm" />
+            </video>
+          </div>
+        </div>
+        </div>
       </main>
     </StudioShell>
   );
